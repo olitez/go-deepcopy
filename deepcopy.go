@@ -49,9 +49,9 @@ func copyRecursive(original, cpy reflect.Value) {
 	// check for implement deepcopy.Interface
 	if original.CanInterface() {
 		if copier, ok := original.Interface().(Interface); ok {
-			cpy := reflect.ValueOf(copier.DeepCopy())
-			if !cpy.IsNil() {
-				cpy.Set(cpy)
+			cpyed := reflect.ValueOf(copier.DeepCopy())
+			if cpyed.IsValid() {
+				cpy.Set(cpyed)
 			}
 			return
 		}
